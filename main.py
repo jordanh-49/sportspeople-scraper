@@ -8,11 +8,24 @@ from datetime import date
 import logging
 import time
 
-# Configure logging
-logging.basicConfig(filename='status.log', level=logging.INFO, format='%(asctime)s - %(message)s')
+# Create a logger
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
-# Log the time the script starts
-logging.info("Script started")
+# Create a RotatingFileHandler
+logger_file_handler = logging.handlers.RotatingFileHandler(
+    "status.log", 
+    maxBytes=1024 * 1024, 
+    backupCount=1, 
+    encoding="utf8"
+)
+
+# Create a formatter and set it for the handler
+formatter = logging.Formatter('%(asctime)s - %(message)s')
+logger_file_handler.setFormatter(formatter)
+
+# Add the handler to the logger
+logger.addHandler(logger_file_handler)
 
 # Read in current master csv
 master = pd.read_csv('data/scrape_master.csv')
@@ -30,9 +43,9 @@ def get_links(num_iterations, max_num_jobs):
         for link in links:
             link_master.append(link)
             
-    if max_num_jobs == len(link_master):
-        pprint("All job links captured, moving on to individual job scrape")
-        pprint(len(link_master))
+    # if max_num_jobs == len(link_master):
+    #     pprint("All job links captured, moving on to individual job scrape")
+    #     pprint(len(link_master))
     
     return link_master
 
@@ -54,7 +67,7 @@ for job_url in link_master:
     job_id = int(job_url.split('https://www.sportspeople.com.au//jobs/')[1].split('-')[0])
     
     if job_id not in master_id:
-        pprint(job_url)
+        # pprint(job_url)
             
         job_response = requests.get(job_url)
         job_soup = BeautifulSoup(job_response.content, 'lxml')
