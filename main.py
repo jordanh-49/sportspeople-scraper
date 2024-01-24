@@ -6,6 +6,7 @@ import math
 import lxml
 from datetime import date
 import logging
+import time
 
 # Configure logging
 logging.basicConfig(filename='status.log', level=logging.INFO, format='%(asctime)s - %(message)s')
@@ -45,7 +46,6 @@ except:
     max_num_jobs = int(init_soup.find('figure', class_='pager-block').find('figcaption').get_text(strip=True).split(' Jobs')[0].split('Showing ')[1])
 
 num_iterations = math.ceil(max_num_jobs / 200)
-
 
 link_master = get_links(num_iterations, max_num_jobs)
 
@@ -198,9 +198,11 @@ for job_url in link_master:
             org_contact_name, org_contact_role, org_contact_phone, org_contact_email,
             job_attachments, description_long, sports, is_cool_flag
         ])
-
+        
+        time.sleep(2)
+        
     else:
-        pass
+        continue
 
 if len(job_item_lst) > 0:
     job_df = pd.DataFrame(job_item_lst, columns = [
