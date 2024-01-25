@@ -30,7 +30,8 @@ logger.addHandler(logger_file_handler)
 
 # Read in current master csv
 master = pd.read_csv('data/scrape_master.csv')
-master_id = list(int(master['job_id']))
+master_id_lst = list(set(master['job_id'].tolist()))
+master_id = [int(job_id) for job_id in master_id_lst]
 
 def get_links(num_iterations, max_num_jobs):
     link_master = []
