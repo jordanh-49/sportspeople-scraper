@@ -11,7 +11,7 @@ import time
 
 # Create a logger
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.DEBUG)
 
 # Create a RotatingFileHandler
 logger_file_handler = logging.handlers.RotatingFileHandler(
@@ -22,10 +22,8 @@ logger_file_handler = logging.handlers.RotatingFileHandler(
 )
 
 # Create a formatter and set it for the handler
-formatter = logging.Formatter('%(asctime)s - %(message)s')
+formatter = ("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger_file_handler.setFormatter(formatter)
-
-# Add the handler to the logger
 logger.addHandler(logger_file_handler)
 
 # Read in current master csv
@@ -236,7 +234,8 @@ if len(job_item_lst) > 0:
     updated_master_df.to_csv('data/scrape_master.csv', index = False)
     
     # Log number of new jobs
-    logging.info(f"New Jobs: {len(job_df)}")
+    log_new_jobs = len(job_df)
+    logging.info(f"New Jobs: {log_new_jobs}")
     
 else:
     # Log message when there are no new jobs
