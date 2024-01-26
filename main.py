@@ -10,8 +10,8 @@ import logging.handlers
 import time
 
 # Create a logger
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
+logger = logging.getLogger("main")
+logger.setLevel(logging.INFO)
 
 # Create a RotatingFileHandler
 logger_file_handler = logging.handlers.RotatingFileHandler(
@@ -236,8 +236,10 @@ if len(job_item_lst) > 0:
     # Log number of new jobs
     log_new_jobs = len(job_df)
     logging.info(f"New Jobs: {log_new_jobs}")
+    print("Logging new jobs:", log_new_jobs)
     
 else:
     # Log message when there are no new jobs
     logging.info("New Jobs: 0")
+    print("No new jobs to log.")
     
