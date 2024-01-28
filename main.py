@@ -6,25 +6,17 @@ import math
 import lxml
 from datetime import date
 import logging
-import logging.handlers
-import time
+from logging.handlers import RotatingFileHandler
 
-# Create a logger
-logger = logging.getLogger("main")
-logger.setLevel(logging.INFO)
+# Set up the rotating file handler
+log_file = 'status.log'
+handler = RotatingFileHandler(log_file, maxBytes=1024*1024, backupCount=1)
+handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
 
-# Create a RotatingFileHandler
-logger_file_handler = logging.handlers.RotatingFileHandler(
-    "status.log", 
-    maxBytes=1024 * 1024, 
-    backupCount=1, 
-    encoding="utf8"
-)
-
-# Create a formatter and set it for the handler
-formatter = ("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-logger_file_handler.setFormatter(formatter)
-logger.addHandler(logger_file_handler)
+# Configure the root logger
+root_logger = logging.getLogger()
+root_logger.setLevel(logging.INFO)
+root_logger.addHandler(handler)
 
 # Read in current master csv
 master = pd.read_csv('data/scrape_master.csv')
@@ -237,10 +229,10 @@ if len(job_item_lst) > 0:
     
     # Log number of new jobs
     log_new_jobs = len(job_df)
-    logging.info(f"New Jobs: {log_new_jobs}")
+    logging.info("Logging new jobs: %d", log_new_jobs)
     print("Logging new jobs:", log_new_jobs)
     
 else:
     # Log message when there are no new jobs
-    logging.info("New Jobs: 0")
+    logging.info("No new jobs to log.")
     print("No new jobs to log.")
