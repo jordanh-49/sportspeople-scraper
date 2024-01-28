@@ -230,7 +230,9 @@ if len(job_item_lst) > 0:
     job_df['date_created'] = date.today()
     
     updated_master_df = pd.concat([master,job_df])
-    updated_master_df.reset_index(inplace=True)
+    updated_master_df.reset_index(drop=True, inplace=True)
+
+
     updated_master_df.to_csv('data/scrape_master.csv', index = False)
     
     # Log number of new jobs
@@ -242,4 +244,3 @@ else:
     # Log message when there are no new jobs
     logging.info("New Jobs: 0")
     print("No new jobs to log.")
-    
