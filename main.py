@@ -7,6 +7,7 @@ import lxml
 from datetime import date
 import logging
 from logging.handlers import RotatingFileHandler
+import time
 
 # Set up the rotating file handler
 log_file = 'status.log'
