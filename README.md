@@ -31,9 +31,13 @@ To get a local copy up and running follow these simple example steps.
 
 ### Installation
 
+Clone the repository and install the required packages:
+
+```bash
 git clone https://github.com/jordanh-49/sportspeople-scraper.git
 cd sportspeople-scraper
 pip install -r requirements.txt
+
 
 ## License
 
