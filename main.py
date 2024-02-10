@@ -4,10 +4,13 @@ from bs4 import BeautifulSoup
 from pprint import pprint
 import math
 import lxml
-from datetime import date
+from datetime import datetime
 import logging
 from logging.handlers import RotatingFileHandler
 import time
+import pytz
+
+melbourne_tz = pytz.timezone('Australia/Melbourne')
 
 # Set up the rotating file handler
 log_file = 'status.log'
@@ -220,7 +223,11 @@ if len(job_item_lst) > 0:
     "job_attachments","description_long", "sports", "is_cool_flag"
     ])
 
-    job_df['date_created'] = date.today()
+    now_utc = datetime.now(pytz.utc)
+    now_melbourne = now_utc.astimezone(melbourne_tz)
+    date_in_melbourne = now_melbourne.date()
+    
+    job_df['date_created'] = date_in_melbourne
     
     updated_master_df = pd.concat([master,job_df])
     updated_master_df.reset_index(drop=True, inplace=True)
