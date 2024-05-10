@@ -17,21 +17,53 @@
 
 ## Getting Started
 
-To get a local copy up and running follow these simple example steps.
+To get started with the Sportspeople Scraper, please follow the instructions below:
+
+### Prerequisites
+
+Ensure you have Python 3.12 installed on your machine. You can download it from Python's official site.
 
 ### Installation
 
-Clone the repository and install the required packages:
+To set up the application locally, follow these steps:
 
-```bash
-git clone https://github.com/jordanh-49/sportspeople-scraper.git
-cd sportspeople-scraper
-pip install -r requirements.txt
-```
+1. **Clone the Repository**:
+   
+   Clone the project repository from GitHub to your local machine using the following command:
 
+   ```bash
+   git clone https://github.com/jordanh-49/sportspeople-scraper/.git
+   ```
+3. **Navigate to the Project Directory**:
+
+   Change to the project directory with:
+
+   ```bash
+   cd sportspeople-scraper
+   ```
+5. **Install Dependencies**:
+   
+   Install the necessary Python packages defined in the `requirements.txt` file:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+### Running the Application
+
+To run the application, execute the following steps:
+
+1. **Usage**:
+   
+   Run the scraper using the following command:
+
+   ```bash
+   python scraper.py
+   ```
+   
 ## License
 
-Distributed under the MIT License. See [LICENSE](https://github.com/jordanh-49/sportspeople-scraper/blob/main/LICENSE.md) for more information.
+Distributed under the MIT License. See [LICENSE](https://github.com/jordanh-49/portfolio/blob/main/LICENSE.md) for more information.
 
 ## Acknowledgements
 
